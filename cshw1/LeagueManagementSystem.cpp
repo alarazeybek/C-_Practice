@@ -1,5 +1,4 @@
-#ifndef LEAGUEMANAGEMENTSYSTEM_CPP
-#define LEAGUEMANAGEMENTSYSTEM_CPP
+
 #include "LeagueManagementSystem.h"
 #include "Team.h"
 #include "Player.h"
@@ -98,20 +97,25 @@ void LeagueManagementSystem::removePlayer( const string teamName, const string p
     else{cout<<"Cannot transfer player.";}
     cout <<" Team "<< teamName <<" does not exist."<<endl; 
 }
-void LeagueManagementSystem::transferPlayer( const string playerName, const string departTeamName, const string arriveTeamName ){
-    printerOn = 0;
-    removePlayer(departTeamName,playerName);
-    Player* p = (*findTheTeam(departTeamName)).findThePlayer(playerName);
-    addPlayer(arriveTeamName,(*p).getName(),(*p).getJerseyNumber(),(*p).getSalaryAmount());
-    printerOn = 1;
-}
-
-Team* LeagueManagementSystem::findTheTeam(const string teamName){
+void LeagueManagementSystem::findThePlayer1(const string playerName, const string teamName, Player*& playerptr){
     for(int i = 0; i<teamNumber;i++){
-        if(teamArrayPTR[i].getName().compare(teamName)){
-            return &teamArrayPTR[i];
+        if(teamArrayPTR[i].getName()==(teamName)){
+            for(int j = 0; j<teamArrayPTR[i].playerNumber;j++){
+                if(teamArrayPTR[i].playerArray[j].getName()==(playerName)){
+                    playerptr = &(teamArrayPTR[i].playerArray[j]);
+                }
+            }
         }
     }
-    return &teamArrayPTR[0];
 }
-#endif
+void LeagueManagementSystem::transferPlayer( const string playerName, const string departTeamName, const string arriveTeamName ){
+    printerOn = 0;
+    Player* playerptr;
+    cout<< "bruh11" << endl;
+    LeagueManagementSystem::findThePlayer1(playerName, departTeamName, playerptr);
+    removePlayer(departTeamName,playerName);
+    cout<< "bruh10" << endl;
+    addPlayer(arriveTeamName,(*playerptr).getName(),(*playerptr).getJerseyNumber(),(*playerptr).getSalaryAmount());
+    cout<< "bruh" << endl;
+    printerOn = 1;
+}

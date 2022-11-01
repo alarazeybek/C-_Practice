@@ -7,9 +7,10 @@ static bool printerOn = 1;
 
 class Player{
 private:
-string name;
-int jerseyNumber;
-int salaryAmount; //I assume that it is an integer
+
+const string* name;
+const int* jerseyNumber;
+const int* salaryAmount; //I assume that it is an integer
 
 public:
 Player(string playerName,  int jersey,  int salary);

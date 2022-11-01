@@ -91,11 +91,3 @@ void Team::removePlayer(const string playerName){
     }
 }
 
-Player* Team::findThePlayer(const string playerName){
-    for(int i = 0; i<playerNumber; i++){
-        if(playerArray[i].getName().compare(playerName)){
-            return &(playerArray[i]);
-        }
-    }
-    return playerArray;
-}

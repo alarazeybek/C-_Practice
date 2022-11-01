@@ -28,7 +28,7 @@ LMS.addTeam( "Karsiyaka", 1912 );
 LMS.addPlayer( "Karsiyaka", "Metecan Birsen", 1, 1000000 );
 LMS.removePlayer( "Tofas", "Melih Mahmutoglu" );
 LMS.removePlayer( "Fenerbahce", "Bugrahan Tuncer" );
-LMS.transferPlayer( "Metecan Birsen", "Karsiyaka", "Fenerbahce" );
+LMS.transferPlayer( "Metecan Birsen", "Karsiyaka", "Fenerbahce" ); //weird
 LMS.transferPlayer( "Lebron James", "Los Angeles Lakers", "Fenerbahce" );
 LMS.transferPlayer( "Michael Jordan", "Darussafaka", "Fenerbahce" );
 LMS.transferPlayer( "Bugrahan Tuncer", "Anadolu Efes", "Fenerbahce" );

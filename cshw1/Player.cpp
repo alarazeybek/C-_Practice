@@ -7,22 +7,22 @@ using namespace std;
 
 Player::Player(){}
 
-Player::Player(string playerName,  int jersey,  int salary){
-    Player::name = playerName;
-    Player::jerseyNumber = jersey;
-    Player::salaryAmount = salary;
+Player::Player(const string playerName,  const int jersey, const int salary){
+    Player::name = &playerName;
+    Player::jerseyNumber = &jersey;
+    Player::salaryAmount = &salary;
 }
 Player::~Player(){
 
 }
 const string Player::getName(){
-    return Player::name;
+    return *Player::name;
 }
 const int Player::getJerseyNumber(){
-    return Player::jerseyNumber;
+    return *Player::jerseyNumber;
 }
 const int Player::getSalaryAmount(){
-    return Player::salaryAmount;
+    return *Player::salaryAmount;
 } 
 
 
