@@ -14,8 +14,8 @@ string getName();
 int getYear();
 void setName(string n);
 void setYear(int y);
-void addPlayerInTeam(const string playerName, const int jersey, const int salary);
-void removePlayer(const string playerName);
+void addPlayerInTeam(const string playerName, const int jersey, const int salary,const bool printer);
+void removePlayer(const string playerName,const bool printer);
 Player* playerArray;
 int playerNumber;
 private:

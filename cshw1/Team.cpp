@@ -38,15 +38,12 @@ void Team::setName(string n){
 void Team::setYear(int y){
     year = y;
 } 
-void Team::addPlayerInTeam( const string playerName, const int jersey, const int salary){
+void Team::addPlayerInTeam( const string playerName, const int jersey, const int salary, const bool printer){
     if(playerArray!=nullptr){
         for(int j=0;j<playerNumber;j++){ //searching the same name
             if((*(playerArray+j)).getJerseyNumber()== jersey){
-                if(printerOn){
-                    cout<< "Cannot add player.";
-                }
-                else{cout<< "Cannot transfer player.";}
-                cout << " Jersey number " << jersey << " already exists in team " + name <<endl;
+                if(printer){cout<< "Cannot add player."<< " Jersey number " << jersey << " already exists in team " + name <<endl;}
+                else if(!printer){cout<< "Cannot transfer player."<< " Jersey number " << jersey << " already exists in team " + name <<endl;}
                 return;
             }
         }
@@ -59,10 +56,10 @@ void Team::addPlayerInTeam( const string playerName, const int jersey, const int
         }
         delete[] playerArray;
         playerArray = k;
-        cout<<"Added player " + playerName + " to team "+ getName()<<endl; 
+        if(printer){cout<<"Added player " + playerName + " to team "+ getName()<<endl;}
     }
 }
-void Team::removePlayer(const string playerName){
+void Team::removePlayer(const string playerName,const bool printer){
     if(playerArray!=nullptr){
         for(int j=0;j<playerNumber;j++){ //searching the same name
             if((*(playerArray+j)).getName().compare(playerName)==0){
@@ -77,17 +74,11 @@ void Team::removePlayer(const string playerName){
                 delete[] playerArray;
                 playerArray = ptr;
                 ptr = nullptr;
-                cout << "Removed player " << playerName <<" from team "<< name << endl;
+                if(printer)cout << "Removed player " << playerName <<" from team "<< name << endl;
                 return;
             }
         }
-        if(printerOn){
-            cout<< "Cannot remove player.";
-        }
-        else{
-            cout<< "Cannot transfer player.";
-        }
-        cout<<" Player " + playerName + " doesn't exist."<<endl;
+        cout<< "Cannot removed player."<<" Player " + playerName + " doesn't exist."<<endl;
     }
 }
 

@@ -18,9 +18,10 @@ public:
     void removeTeam( const string name );
     void removePlayer( const string teamName, const string playerName );
 
-    void findThePlayer1(const string playerName, const string teamName, Player*& playerptr);
+    bool findThePlayer1(const string playerName, const string teamName, Player*& playerptr);
     void transferPlayer( const string playerName, const string departTeamName, const string arriveTeamName );
-
+    bool addPlayer2( const string teamName, const string playerName, const int jersey, const int salary );
+    bool removePlayer2( const string teamName, const string playerName );
     void showAllTeams() const;
     void showTeam( const string name ) const;
     void showPlayer( const string name ) const;

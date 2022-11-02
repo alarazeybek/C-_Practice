@@ -3,14 +3,13 @@
 #include <iostream>
 #include <string>
 using namespace std;
-static bool printerOn = 1;
 
 class Player{
 private:
 
-const string* name;
-const int* jerseyNumber;
-const int* salaryAmount; //I assume that it is an integer
+string name;
+int jerseyNumber;
+int salaryAmount; //I assume that it is an integer
 
 public:
 Player(string playerName,  int jersey,  int salary);
@@ -19,6 +18,7 @@ Player();
 const string getName();
 const int getJerseyNumber();
 const int getSalaryAmount();
+//Player& operator=( const Player& right );
 };
 
 
