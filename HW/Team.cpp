@@ -4,18 +4,24 @@
 #include "Team.h"
 using namespace std;
 
+Team::Team(const string aName, const int aYear){
+    name = aName;
+    year = aYear;
+    playerNumber = 0;
+    playerArray = nullptr;
+}
 Team::Team(){
-    playerNumberPTR = nullptr;
-    teamNamePTR=nullptr;
-    yearPTR=nullptr;
-    playerNumberPTR=nullptr;
+    name = -1;
+    year = -1;
+    playerNumber = 0;
+    playerArray = nullptr;
 }
 Team::~Team(){
-    if(playerNumberPTR!=nullptr || playerNumberPTR!=0){
+    if(playerArray!=nullptr){
         delete []playerArray;
-        playerArray = nullptr;
     } 
 }
+/*
 Team::Team(string n, int y){
     playerNumberPTR = &(Team::playerNumber);
     teamNamePTR=&(Team::name);
@@ -25,45 +31,46 @@ Team::Team(string n, int y){
     *playerNumberPTR = 0;
     playerArray = new Player[*playerNumberPTR];
 }
+*/
 void Team::addPlayerInTeam( const string playerName, const int jersey, const int salary, const bool printer){
     bool b = findPlayerbyJerseyNumber(jersey,printer);
     if(!b){
         Player* p = new Player(playerName,jersey,salary);
-        *playerNumberPTR++;
-        Player tempArray[*playerNumberPTR]; 
+        playerNumber++;
+        Player tempArray[playerNumber]; 
         tempArray[0] = *p;
-        for(int i = 1; i< *playerNumberPTR;i++){
+        for(int i = 1; i< playerNumber;i++){
             tempArray[i] = playerArray[i-1];
         }
         delete[] playerArray;
-        playerArray = new Player[*playerNumberPTR];
-        for(int i = 0; i< *playerNumberPTR;i++){
+        playerArray = new Player[playerNumber];
+        for(int i = 0; i< playerNumber;i++){
             playerArray[i] = tempArray[i];
         }
         if(printer){
-            cout<<"Added player " + playerName + " to team "+ *teamNamePTR + "."<<endl;
+            cout<<"Added player " + playerName + " to team "+ name + "."<<endl;
         }
     }
 }
 void Team::removePlayer(const string playerName,const bool printer){
     Player* findplayerPTR = nullptr;
     int index = 0;
-    if(findPlayerbyName(playerName,findplayerPTR,index)){ //checking the existance of the player
-        *playerNumberPTR--;
-        Player tempArray[*playerNumberPTR];
+    if(findPlayerbyName(playerName)){ //checking the existance of the player
+        playerNumber--;
+        Player tempArray[playerNumber];
         for(int i = 0; i<index;i++){ //copying until we reach the index of removed player
             tempArray[i] = playerArray[i];
         }
-        for(int i = index; i<*playerNumberPTR;i++){ //copying the second part
+        for(int i = index; i<playerNumber;i++){ //copying the second part
             tempArray[i] = playerArray[i+1];
         }
         delete[] playerArray;
-        playerArray = new Player[*playerNumberPTR];
-        for(int i = 0;i<*playerNumberPTR;i++){
+        playerArray = new Player[playerNumber];
+        for(int i = 0;i<playerNumber;i++){
             playerArray[i] = tempArray[i];
         }
         if(printer){
-            cout << "Remove player " << playerName <<" from team "<< *teamNamePTR +"."<< endl;
+            cout << "Remove player " << playerName <<" from team "<< name +"."<< endl;
         }
     }
     if(printer){
@@ -74,12 +81,12 @@ void Team::removePlayer(const string playerName,const bool printer){
     }
 }
 //HELPER METHODS
-bool Team::findPlayerbyName(string playerName, Player* playerPTR, int index){
+bool Team::findPlayerbyName(string playerName){
     if(playerArray!=nullptr){
-        for(int i = 0; i<*playerNumberPTR;i++){
-            if(*(playerArray[i].namePTR)==playerName){
-                playerPTR = &(playerArray[i]);
-                index = i;
+        for(int i = 0; i < playerNumber;i++){
+            if(playerArray[i].getName()==playerName){
+                //playerPTR = &(playerArray[i]);
+                //index = i;
                 return true;
             }
         }
@@ -88,18 +95,27 @@ bool Team::findPlayerbyName(string playerName, Player* playerPTR, int index){
 }
 bool Team::findPlayerbyJerseyNumber(int jersey,bool printer){
     if(playerArray!=nullptr){
-        for(int i = 0; i<*playerNumberPTR;i++){
-            if(*(playerArray[i].jerseyNumberPTR)==jersey){
+        for(int i = 0; i< playerNumber;i++){
+            if(playerArray[i].getJersey()==jersey){
                 if(printer){
                     cout<< "Cannot add player.";
                 }
                 else if(!printer){
                     cout<< "Cannot transfer player.";
                 }
-                cout<< " Jersey number " << jersey << " already exists in team " + *teamNamePTR +"."<<endl;
+                cout<< " Jersey number " << jersey << " already exists in team " + name +"."<<endl;
                 return true;
             }
         }
     }
     return false;
+}
+string Team::getName(){
+    return name;
+}
+int Team::getPlayerNumber(){
+    return playerNumber;
+}
+int Team::getYear(){
+    return year;
 }

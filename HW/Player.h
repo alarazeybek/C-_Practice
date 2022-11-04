@@ -5,19 +5,21 @@
 using namespace std;
 
 class Player{
-private:
-string name;
-int jerseyNumber;
-int salaryAmount; //I assume that it is an integer
+ //I assume that it is an integer
 
 public:
 Player(string playerName,  int jersey,  int salary);
 Player();
 ~Player();
+string getName();
+int getJersey();
+int getSalary();
 //pointers to reach private data
-string* namePTR;
-int* jerseyNumberPTR;
-int* salaryAmountPTR;
+
+private:
+string name;
+int jerseyNumber;
+int salaryAmount;
 };
 
 
