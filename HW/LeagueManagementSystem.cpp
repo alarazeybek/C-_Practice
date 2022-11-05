@@ -18,7 +18,8 @@ LeagueManagementSystem:: ~LeagueManagementSystem(){
 void LeagueManagementSystem::addTeam(const string name, const int year){
     Team* temp = nullptr;
     int index=0;
-    bool b = findTeambyName(name, index);
+    Team* t;
+    bool b = findTeambyName(name,t, index);
     if(!b){
         Team team(name,year);
         (teamNumber)++;
@@ -41,7 +42,8 @@ void LeagueManagementSystem::addTeam(const string name, const int year){
 void LeagueManagementSystem::removeTeam(const string name){
     Team* temp = nullptr;
     int index = 0;
-    bool b = findTeambyName(name, index);
+    Team* t;
+    bool b = findTeambyName(name,t, index);
     if(b){
         teamNumber--;
         Team team[teamNumber];
@@ -65,16 +67,32 @@ void LeagueManagementSystem::showAllTeams() const{
     
 }
 void LeagueManagementSystem::addPlayer( const string teamName, const string playerName, const int jersey, const int salary ){
-
+    Team* t;
+    int index;
+    bool b = findTeambyName(teamName,t,index);
+    if(b){
+        (*t).addPlayerInTeam(playerName,jersey,salary,1);//if printer = 0; tranfer player's cout will be called
+        return;
+    }
+    cout<<"Cannot add player."<<" Team "<< teamName <<" does not exist."<<endl;
 }
 
 void LeagueManagementSystem::removePlayer( const string teamName, const string playerName ){
+    Team* t;
+    int index;
+    bool b = findTeambyName(teamName,t,index);
+    if(b){
+        (*t).removePlayer(playerName,1);//if bool = 0; tranfer player's cout will be called
+        return;
     }
-bool LeagueManagementSystem::findTeambyName(string teamName, int& index){
+    cout<<"Cannot remove player."<<" Team "<< teamName <<" does not exist."<<endl; 
+}
+bool LeagueManagementSystem::findTeambyName(string teamName, Team*& t, int& index){
     if(teamArrayPTR!=nullptr){
         for(int i = 0 ; i<teamNumber;i++){
             if((teamArrayPTR[i].getName())==(teamName)){
                 index = i;
+                t = &teamArrayPTR[i];
                 return true;
             }
         }
@@ -82,6 +100,31 @@ bool LeagueManagementSystem::findTeambyName(string teamName, int& index){
     return false;
 }
 void LeagueManagementSystem::transferPlayer(const string playerName, const string departTeamName, const string arriveTeamName){
-    
-}
+    /*//depart Team
+    Team* departPTR;
+    int indexDepart;
+    bool departExist = findTeambyName(departTeamName,departPTR,indexDepart);
+    if(!departExist){ 
+        cout<<"Cannot remove player."<<" Team "<< departTeamName<<" does not exist."<<endl; 
+        return;
+    }
+    //arriveTeam
+    Team* arrivePTR;
+    int indexArrived;
+    bool arrivedExist = findTeambyName(departTeamName,departPTR,indexArrived);
+    if(!arrivedExist){ 
+        cout<<"Cannot tranfer player."<<" Team "<< arriveTeamName <<" does not exist."<<endl; 
+        return;
+    }
+    //Player check
+    Player* transferPTR;
+    bool playerExist = (*departPTR).findPlayerbyName(playerName, transferPTR);
+    if(!playerExist){
+        cout<<"Cannot tranfer player."<<" Player "<< playerName<<" does not exist."<<endl; 
+        return;
+    }
+    (*departPTR).removePlayer(playerName, 0);
+    (*arrivePTR).addPlayerInTeam(playerName, (*transferPTR).getJersey(), (*transferPTR).getSalary(), 0);
+    cout<<"Transferred player "<<playerName <<" from team "+departTeamName + " to team " + arriveTeamName<<endl; 
+*/}
 

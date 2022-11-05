@@ -33,6 +33,7 @@ Team::Team(string n, int y){
 }
 */
 void Team::addPlayerInTeam( const string playerName, const int jersey, const int salary, const bool printer){
+
     bool b = findPlayerbyJerseyNumber(jersey,printer);
     if(!b){
         Player* p = new Player(playerName,jersey,salary);
@@ -53,9 +54,9 @@ void Team::addPlayerInTeam( const string playerName, const int jersey, const int
     }
 }
 void Team::removePlayer(const string playerName,const bool printer){
-    Player* findplayerPTR = nullptr;
+    Player* p = nullptr;
     int index = 0;
-    if(findPlayerbyName(playerName)){ //checking the existance of the player
+    if(findPlayerbyName(playerName,p)){ //checking the existance of the player
         playerNumber--;
         Player tempArray[playerNumber];
         for(int i = 0; i<index;i++){ //copying until we reach the index of removed player
@@ -81,11 +82,11 @@ void Team::removePlayer(const string playerName,const bool printer){
     }
 }
 //HELPER METHODS
-bool Team::findPlayerbyName(string playerName){
+bool Team::findPlayerbyName(string playerName,Player* p){
     if(playerArray!=nullptr){
         for(int i = 0; i < playerNumber;i++){
             if(playerArray[i].getName()==playerName){
-                //playerPTR = &(playerArray[i]);
+                p = &(playerArray[i]);
                 //index = i;
                 return true;
             }
