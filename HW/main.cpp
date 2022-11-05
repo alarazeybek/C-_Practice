@@ -27,7 +27,7 @@ LMS.addPlayer( "Karsiyaka", "Metecan Birsen", 1, 1000000 );
 LMS.removePlayer( "Tofas", "Melih Mahmutoglu" );
 
 LMS.removePlayer( "Fenerbahce", "Bugrahan Tuncer" );
-/*LMS.transferPlayer( "Metecan Birsen", "Karsiyaka", "Fenerbahce" ); //weird
+LMS.transferPlayer( "Metecan Birsen", "Karsiyaka", "Fenerbahce" ); //weird
 LMS.transferPlayer( "Lebron James", "Los Angeles Lakers", "Fenerbahce" );
 LMS.transferPlayer( "Michael Jordan", "Darussafaka", "Fenerbahce" );
 LMS.transferPlayer( "Bugrahan Tuncer", "Anadolu Efes", "Fenerbahce" );
@@ -40,6 +40,6 @@ LMS.showTeam( "Boston Celtics" );
 cout << endl;
 LMS.showPlayer( "Melih Mahmutoglu" );
 cout << endl;
-LMS.showPlayer( "Furkan Korkmaz" ); */
+LMS.showPlayer( "Furkan Korkmaz" ); 
 return 0;
 }

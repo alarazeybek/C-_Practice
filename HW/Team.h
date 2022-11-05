@@ -11,21 +11,16 @@ public:
     Team();
     ~Team();
 
-    void addPlayerInTeam(const string playerName, const int jersey, const int salary,const bool printer);
-    void removePlayer(const string playerName,const bool printer);
+    bool addPlayerInTeam(const string playerName, const int jersey, const int salary,const bool printer);
+    bool removePlayer(const string playerName,const bool printer);
     bool findPlayerbyName(string playerName, Player*& p);
     bool findPlayerbyJerseyNumber(int jersey, bool printer);
     string getName();
     int getYear();
     int getPlayerNumber();
     Team& operator=(const Team&);
+    Player* getPlayerArray();
 
-    //bool Team::findPlayerbyName(string playerName, Player* playerPTR, int index){
-/*
-string* teamNamePTR;
-int* yearPTR;
-int* playerNumberPTR;
-*/
 private:
     string name;
     int year;

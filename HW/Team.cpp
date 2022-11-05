@@ -21,18 +21,7 @@ Team::~Team(){
         delete []playerArray;
     } 
 }
-/*
-Team::Team(string n, int y){
-    playerNumberPTR = &(Team::playerNumber);
-    teamNamePTR=&(Team::name);
-    yearPTR=&(Team::year);
-    *teamNamePTR = n;
-    *yearPTR = y;
-    *playerNumberPTR = 0;
-    playerArray = new Player[*playerNumberPTR];
-}
-*/
-void Team::addPlayerInTeam( const string playerName, const int jersey, const int salary, const bool printer){
+bool Team::addPlayerInTeam( const string playerName, const int jersey, const int salary, const bool printer){
 
     bool b = findPlayerbyJerseyNumber(jersey,printer);
     if(!b){
@@ -52,9 +41,11 @@ void Team::addPlayerInTeam( const string playerName, const int jersey, const int
             cout<<"Added player " + playerName + " to team "+ name + "."<<endl;
         }
         delete p;
+        return true;
     }
+    return false;
 }
-void Team::removePlayer(const string playerName,const bool printer){
+bool Team::removePlayer(const string playerName,const bool printer){
     Player* p = nullptr;
     int index = 0;
     if(findPlayerbyName(playerName,p)){ //checking the existance of the player
@@ -74,6 +65,7 @@ void Team::removePlayer(const string playerName,const bool printer){
         if(printer){
             cout << "Remove player " << playerName <<" from team "<< name +"."<< endl;
         }
+        return true;
     }
     if(printer){
         cout<< "Cannot removed player."<<" Player " + playerName + " doesn't exist."<<endl;
@@ -81,6 +73,7 @@ void Team::removePlayer(const string playerName,const bool printer){
     else{
         cout<< "Cannot transfered player."<<" Player " + playerName + " doesn't exist."<<endl;
     }
+    return false;
 }
 //HELPER METHODS
 bool Team::findPlayerbyName(string playerName,Player*& p){
@@ -120,6 +113,9 @@ int Team::getPlayerNumber(){
 }
 int Team::getYear(){
     return year;
+}
+Player* Team::getPlayerArray(){
+    return playerArray;
 }
 Team& Team::operator=(const Team& right){
     if(&right != this){
