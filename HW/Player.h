@@ -14,6 +14,7 @@ Player();
 string getName();
 int getJersey();
 int getSalary();
+Player& operator =(const Player&);
 //pointers to reach private data
 
 private:

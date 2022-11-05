@@ -24,9 +24,9 @@ void LeagueManagementSystem::addTeam(const string name, const int year){
         Team team(name,year);
         (teamNumber)++;
         Team tempArray[teamNumber];
-        tempArray[0] = team;
+        tempArray[teamNumber - 1] = team;
         for(int i = 1 ; i<teamNumber;i++){
-            tempArray[i] = teamArrayPTR[i-1];
+            tempArray[i - 1] = teamArrayPTR[i-1];
         }
         delete[] teamArrayPTR;
         teamArrayPTR = new Team[teamNumber];
@@ -100,7 +100,7 @@ bool LeagueManagementSystem::findTeambyName(string teamName, Team*& t, int& inde
     return false;
 }
 void LeagueManagementSystem::transferPlayer(const string playerName, const string departTeamName, const string arriveTeamName){
-    /*//depart Team
+    //depart Team
     Team* departPTR;
     int indexDepart;
     bool departExist = findTeambyName(departTeamName,departPTR,indexDepart);
@@ -126,5 +126,5 @@ void LeagueManagementSystem::transferPlayer(const string playerName, const strin
     (*departPTR).removePlayer(playerName, 0);
     (*arrivePTR).addPlayerInTeam(playerName, (*transferPTR).getJersey(), (*transferPTR).getSalary(), 0);
     cout<<"Transferred player "<<playerName <<" from team "+departTeamName + " to team " + arriveTeamName<<endl; 
-*/}
+}
 

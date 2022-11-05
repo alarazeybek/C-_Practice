@@ -28,5 +28,13 @@ string Player::getName(){
 int Player::getSalary(){
     return salaryAmount;
 }
+Player& Player::operator=(const Player& right){
+    if(&right != this){
+        name = right.name;
+        salaryAmount = right.salaryAmount;
+        jerseyNumber = right.jerseyNumber;
+    }
+    return *this;
+}
 
 #endif

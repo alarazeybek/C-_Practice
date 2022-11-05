@@ -51,6 +51,7 @@ void Team::addPlayerInTeam( const string playerName, const int jersey, const int
         if(printer){
             cout<<"Added player " + playerName + " to team "+ name + "."<<endl;
         }
+        delete p;
     }
 }
 void Team::removePlayer(const string playerName,const bool printer){
@@ -82,7 +83,7 @@ void Team::removePlayer(const string playerName,const bool printer){
     }
 }
 //HELPER METHODS
-bool Team::findPlayerbyName(string playerName,Player* p){
+bool Team::findPlayerbyName(string playerName,Player*& p){
     if(playerArray!=nullptr){
         for(int i = 0; i < playerNumber;i++){
             if(playerArray[i].getName()==playerName){
@@ -119,4 +120,19 @@ int Team::getPlayerNumber(){
 }
 int Team::getYear(){
     return year;
+}
+Team& Team::operator=(const Team& right){
+    if(&right != this){
+        name = right.name;
+        year = right.year;
+        playerNumber = right.playerNumber;
+        if(playerArray){
+            delete []playerArray;
+        }
+        playerArray = new Player[playerNumber];
+        for(int a = 0; a < playerNumber; a++){
+            playerArray[a]  =  right.playerArray[a];
+        }
+    }
+    return *this;
 }
