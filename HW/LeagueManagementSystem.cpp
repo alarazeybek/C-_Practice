@@ -33,7 +33,7 @@ void LeagueManagementSystem::addTeam(const string name, const int year){
         for(int i = 0 ; i<teamNumber;i++){
             teamArrayPTR[i] = tempArray[i];
         }
-        cout << "Added team " << name << endl;
+        cout << "Added team " << name <<"."<< endl;
         return;
     }  
     cout<< "Cannot add team. Team " + name + " already exist."<<endl;
@@ -103,7 +103,7 @@ void LeagueManagementSystem::transferPlayer(const string playerName, const strin
     int indexDepart;
     bool departExist = findTeambyName(departTeamName,departPTR,indexDepart);
     if(!departExist){ 
-        cout<<"Cannot remove player."<<" Team "<< departTeamName<<" does not exist."<<endl; 
+        cout<<"Cannot tranfer player."<<" Team "<< departTeamName<<" does not exist."<<endl; 
         return;
     }
     //arriveTeam
@@ -138,8 +138,10 @@ void LeagueManagementSystem::showAllTeams() const{
             total_salary += teamArrayPTR[i].getPlayerArray()[j].getSalary();
         }
     cout<<teamArrayPTR[i].getName()<<", "<<teamArrayPTR[i].getYear()<<", "<<
-teamArrayPTR[i].getPlayerNumber()<<" players, "<<total_salary<<" TL total salary"<<endl;
+    teamArrayPTR[i].getPlayerNumber()<<" players, "<<total_salary<<" TL total salary"<<endl;
+    return;
     }
+    cout<<"None"<<endl;
 }
 void LeagueManagementSystem::showTeam( const string name ) const{
     for(int i = 0;i<teamNumber;i++){
@@ -150,7 +152,7 @@ void LeagueManagementSystem::showTeam( const string name ) const{
             }   
             cout<<"Team:\n"<<name+", "<<teamArrayPTR[i].getYear()<<", "<<teamArrayPTR[i].getPlayerNumber()<<
                   " players, "<< total_salary<< " TL total salary"<<endl;
-            cout<<"players:"<<endl;
+            cout<<"Players:"<<endl;
             for(int j=0; j<teamArrayPTR[i].getPlayerNumber();j++){
                 cout<<teamArrayPTR[i].getPlayerArray()[j].getName()<<", jersey "<<
                       teamArrayPTR[i].getPlayerArray()[j].getJersey()<<", "<<

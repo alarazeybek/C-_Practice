@@ -5,7 +5,7 @@ using namespace std;
 #include "Player.h"
 int main() {
 LeagueManagementSystem LMS;
-//LMS.showAllTeams();
+LMS.showAllTeams();
 LMS.addTeam( "Fenerbahce", 1907 );
 LMS.addTeam( "Tofas", 1957 );
 LMS.addTeam( "Anadolu Efes", 1951 );

@@ -63,12 +63,12 @@ bool Team::removePlayer(const string playerName,const bool printer){
             playerArray[i] = tempArray[i];
         }
         if(printer){
-            cout << "Remove player " << playerName <<" from team "<< name +"."<< endl;
+            cout << "Removed player " << playerName <<" from team "<< name +"."<< endl;
         }
         return true;
     }
     if(printer){
-        cout<< "Cannot removed player."<<" Player " + playerName + " doesn't exist."<<endl;
+        cout<< "Cannot remove player."<<" Player " + playerName + " doesn't exist."<<endl;
     }
     else{
         cout<< "Cannot transfered player."<<" Player " + playerName + " doesn't exist."<<endl;
