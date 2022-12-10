@@ -14,7 +14,7 @@ class Subscriber{
     private:
         int id;
     public:
-        Subscriber(int& newid);
+        Subscriber(int newid);
         int getId();
         void setId(int& newid);
 };

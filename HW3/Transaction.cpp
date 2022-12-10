@@ -8,7 +8,7 @@
 #include "Transaction.h"
 using namespace std;
 
-Transaction::Transaction(int& movieID, int& SubsID){
+Transaction::Transaction(int movieID, int SubsID){
     mID = movieID;
     sID = SubsID;
 }
@@ -20,4 +20,5 @@ int Transaction::getSubscriber(){
 }
 string Transaction::getLabel(){
     string str = "Subscriber " + to_string(sID) +" rented Movie " + to_string(mID);
+    return str;
 }

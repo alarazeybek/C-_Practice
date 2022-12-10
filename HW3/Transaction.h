@@ -15,7 +15,7 @@ class Transaction{
         int mID;
         int sID;
     public:
-        Transaction(int& movieID, int& SubsID);
+        Transaction(int movieID, int SubsID);
         int getMovie();
         int getSubscriber();
         string getLabel();

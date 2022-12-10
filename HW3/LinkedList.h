@@ -23,6 +23,7 @@ public:
     LinkedList<ItemType>();
     ~LinkedList<ItemType>();
     bool isEmpty();
+    bool isExist(Node<ItemType>* n);
     int getLength();
     void insert(Node<ItemType>* n);
     void remove(Node<ItemType>* n);
@@ -38,17 +39,40 @@ LinkedList<ItemType>::LinkedList(){
 }
 template <class ItemType>
 LinkedList<ItemType>::~LinkedList(){
-    //clear();
     delete head;
-    nodeNumber=0;
+    head == nullptr;
 }
 //-------------------------------------------------ADD NODE----------------------------------------------------------------
 template <class ItemType>
-void LinkedList<ItemType>::insert(Node<ItemType>* n){ //TODO movie objesiyse ekleme node->data->setCount((node->data->getCount())+1); yap
-    if(head == nullptr){
+void LinkedList<ItemType>::insert(Node<ItemType>* n){ 
+    if(isExist(n)){
+        //delete n; //TODO : error verebilir. List e eklenmezse silinmez ve leak verir //siliyor ve ram loc basıyor
+        cout<<"already exists, cannot insert. "<<endl;
+        return;
+    } 
+    else if(head == nullptr){ //empty list
         head = n;
+        nodeNumber++;
+        return;
     }
-   // else if()
+    else if(compareIDs(n,head)<0){ //n is the smallest ID
+        n->next = head;
+        head = n;
+        nodeNumber++;
+        return;
+    }
+    else{
+        Node<ItemType>* left = head;
+        Node<ItemType>* right = head->next;
+        while(right != nullptr && compareIDs(n,right)>0){
+            left = right;
+            right = right->next;
+        }
+        left->next = n;
+        n->next = right;
+        nodeNumber++;
+        return;
+    }
 }
 //------------------------------------------------REMOVE NODE---------------------------------------------------------------
 template <class ItemType>
@@ -56,16 +80,28 @@ void LinkedList<ItemType>::remove(Node<ItemType>* n){return;}
 
 //------------------------------------------------HELPER METHODS-----------------------------------------------------------
 template <class ItemType>
+bool LinkedList<ItemType>::isExist(Node<ItemType>* n){
+    Node<ItemType>* temp = head;
+    while(temp!=nullptr){
+        if(compareIDs(temp,n) == 0){
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+template <class ItemType>
 ItemType* LinkedList<ItemType>::getItem(int index){
     bool valid = (index<=nodeNumber) && (index>0);
     if(valid){
         Node<ItemType>* temp = head;
-        while(temp!=nullptr && temp->next != nullptr && index > 0){
+        while(temp!=nullptr && temp->next != nullptr && index > 1){
                 temp = temp->next;
                 index--;
         }
         return temp->itemptr;
     }
+    return nullptr;
 }
 template <class ItemType>
 bool LinkedList<ItemType>::isEmpty(){

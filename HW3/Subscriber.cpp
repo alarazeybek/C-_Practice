@@ -8,7 +8,7 @@
 #include "Subscriber.h"
 using namespace std;
 
-Subscriber::Subscriber(int& newid){
+Subscriber::Subscriber(int newid){
     id = newid;
 }
 int Subscriber::getId(){
