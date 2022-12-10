@@ -138,10 +138,10 @@ void LeagueManagementSystem::showAllTeams() const{
             total_salary += teamArrayPTR[i].getPlayerArray()[j].getSalary();
         }
     cout<<teamArrayPTR[i].getName()<<", "<<teamArrayPTR[i].getYear()<<", "<<
-    teamArrayPTR[i].getPlayerNumber()<<" players, "<<total_salary<<" TL total salary"<<endl;
+    teamArrayPTR[i].getPlayerNumber()<<" players, "<<total_salary<<" TL total salary"<<endl;}
     return;
-    }
-    cout<<"None"<<endl;
+    if(teamNumber<1)
+     cout<<"None"<<endl;
 }
 void LeagueManagementSystem::showTeam( const string name ) const{
     for(int i = 0;i<teamNumber;i++){
