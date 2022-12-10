@@ -8,6 +8,7 @@
 #define LINKEDLIST_H
 #include <iostream>
 #include "Node.h"
+#include "Movie.h"
 #include "string"
 using namespace std;
 
@@ -20,26 +21,20 @@ private:
    int nodeNumber;
 public:
     LinkedList<ItemType>();
-    LinkedList<ItemType>(ItemType* data);
     ~LinkedList<ItemType>();
     bool isEmpty();
     int getLength();
-    void insert(const ItemType& newEntry);
-    void remove(const int position);
-    void clear();
+    void insert(Node<ItemType>* n);
+    void remove(Node<ItemType>* n);
     ItemType* getItem(int index);
-    bool replace(int position, const ItemType& newItem); //returns replaced item
+    int compareIDs(Node<ItemType>* n1, Node<ItemType>* n2);
 };
 
+//-----------------------------------------------------CONSTRUCTOR & DESTRUCTOR----------------------------------------
 template <class ItemType>
 LinkedList<ItemType>::LinkedList(){
     head = nullptr;
     nodeNumber = 0;
-}
-template <class ItemType>
-LinkedList<ItemType>::LinkedList(ItemType* data){
-    head = new Node<ItemType>(data);
-    nodeNumber = 1;
 }
 template <class ItemType>
 LinkedList<ItemType>::~LinkedList(){
@@ -47,36 +42,19 @@ LinkedList<ItemType>::~LinkedList(){
     delete head;
     nodeNumber=0;
 }
+//-------------------------------------------------ADD NODE----------------------------------------------------------------
 template <class ItemType>
-bool LinkedList<ItemType>::isEmpty(){
-    return head == nullptr;
-}
-template <class ItemType>
-int LinkedList<ItemType>::getLength(){
-    return nodeNumber;
-}
-template <class ItemType>
-void LinkedList<ItemType>::insert( const ItemType& newEntry){
-    Node<ItemType>* temp = head ;
-    while(temp != nullptr && temp->next != nullptr){
-        temp = temp->next;
+void LinkedList<ItemType>::insert(Node<ItemType>* n){ //TODO movie objesiyse ekleme node->data->setCount((node->data->getCount())+1); yap
+    if(head == nullptr){
+        head = n;
     }
-    nodeNumber++;
-    temp->next = new Node<ItemType>(newEntry);
+   // else if()
 }
+//------------------------------------------------REMOVE NODE---------------------------------------------------------------
 template <class ItemType>
-void LinkedList<ItemType>::remove(const int position){return;}
+void LinkedList<ItemType>::remove(Node<ItemType>* n){return;}
 
-template <class ItemType>
-void LinkedList<ItemType>::clear(){
-    while(!isEmpty()){
-        Node<ItemType> *temp = head->next;
-        delete head;
-        nodeNumber--;
-        head = temp;
-    }
-}
-
+//------------------------------------------------HELPER METHODS-----------------------------------------------------------
 template <class ItemType>
 ItemType* LinkedList<ItemType>::getItem(int index){
     bool valid = (index<=nodeNumber) && (index>0);
@@ -86,8 +64,33 @@ ItemType* LinkedList<ItemType>::getItem(int index){
                 temp = temp->next;
                 index--;
         }
-        return temp->data;
+        return temp->itemptr;
     }
 }
-
+template <class ItemType>
+bool LinkedList<ItemType>::isEmpty(){
+    return head == nullptr;
+}
+template <class ItemType>
+int LinkedList<ItemType>::getLength(){
+    return nodeNumber;
+}
+//-----------------------------------------COMPARE IDS-------------------------------------------
+template <class ItemType>
+int LinkedList<ItemType>::compareIDs(Node<ItemType>* n1, Node<ItemType>* n2){
+    return -666;
+}
+template <>
+int LinkedList<Movie>::compareIDs(Node<Movie>* n1, Node<Movie>* n2){
+    if(n1->itemptr->getId() ==  n2->itemptr->getId()){
+        return 0;
+    }
+    else if(n1->itemptr->getId() >  n2->itemptr->getId()){
+        return 1;
+    }
+    else if(n1->itemptr->getId() <  n2->itemptr->getId()){
+        return -1;
+    }
+    return -666;
+}
 #endif

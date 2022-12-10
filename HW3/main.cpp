@@ -11,16 +11,14 @@
 #include "Node.h"
 #include "LinkedList.h"
 #include "Movie.h"
+#include "Subscriber.h"
+#include "Transaction.h"
 using namespace std;
 //typedef Movie ItemType;
 
 int main() {
-    Movie* m = new Movie(123,1);
-    Node<Movie> *node = new Node(m);
-    cout<<(*node).data.getId();
-    delete node;
-    /*LinkedList<Movie> *list = new LinkedList(new Movie(123,1));
-    cout<<(*list).getItem(1)->getId();
-    delete list; */
+    Movie* m = new Movie(133,5);
+    Subscriber* s = new Subscriber(32);
+    
     return 0;
 }

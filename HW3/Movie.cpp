@@ -21,6 +21,11 @@ int Movie::getCount(){
 void Movie::setId(int& newid){
     id = newid;
 }
-void Movie::setCount(int& newcount){
-    count = newcount;
+
+void Movie::clearCount(){
+    count = 0;
+}
+
+void Movie::setCount(int& diff){
+    count += diff;
 }

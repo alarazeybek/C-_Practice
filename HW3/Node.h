@@ -13,24 +13,19 @@ using namespace std;
 
 template <class ItemType>
 struct Node{
-    ItemType data;
+    ItemType* itemptr;
     Node* next;
     Node(){
-        data = nullptr;
+        itemptr = nullptr;
         next = nullptr;
     }
     ~Node(){
-        ItemType* eraser = &data;
-        delete eraser;
+        delete itemptr;
         next = nullptr;
     }
-    Node( ItemType* data){
-        Node<ItemType>::data = *data;
+    Node(ItemType* data){
+        itemptr = data;
         next = nullptr;
-    }
-    Node( ItemType* data, Node<ItemType>* nextItem){
-        Node<ItemType>::data = data;
-        next = nextItem;
     }
 };
    
