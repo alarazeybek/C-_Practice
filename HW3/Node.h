@@ -13,8 +13,8 @@ using namespace std;
 
 template <class ItemType>
 struct Node{
-    ItemType* itemptr;
-    Node* next;
+    ItemType* itemptr = nullptr;
+    Node* next = nullptr;
     Node(){
         itemptr = nullptr;
         next = nullptr;

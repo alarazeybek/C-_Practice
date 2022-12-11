@@ -17,7 +17,7 @@ template <class ItemType>
 class LinkedList
 {
 private:
-   Node<ItemType> *head;
+   Node<ItemType> *head = nullptr;
    int nodeNumber;
 public:
     LinkedList<ItemType>();
@@ -76,7 +76,33 @@ void LinkedList<ItemType>::insert(Node<ItemType>* n){
 }
 //------------------------------------------------REMOVE NODE---------------------------------------------------------------
 template <class ItemType>
-void LinkedList<ItemType>::remove(Node<ItemType>* n){return;}
+void LinkedList<ItemType>::remove(Node<ItemType>* n){
+    if(isEmpty()){
+        cout<<"There are no element to remove in the list"<<endl;
+        return;
+    }
+    else if(!isExist(n)){
+        cout<<"Element to remove cannot be found in the list"<<endl;
+        return;
+    }
+    else if(compareIDs(head,n) == 0){//first element
+        Node<ItemType>* right = head->next;
+        delete head;
+        nodeNumber--;
+        head = right;
+    }
+    else{
+        Node<ItemType>* left = head;
+        while(left->next != nullptr && left->next != n){
+            left = left->next;
+        }
+        Node<ItemType>* right = left->next->next;
+        delete left->next;
+        nodeNumber--;
+        left->next = right;
+        return;
+    }
+}
 
 //------------------------------------------------HELPER METHODS-----------------------------------------------------------
 template <class ItemType>
@@ -101,6 +127,7 @@ ItemType* LinkedList<ItemType>::getItem(int index){
         }
         return temp->itemptr;
     }
+    cout<<"No item in the specified index";
     return nullptr;
 }
 template <class ItemType>
