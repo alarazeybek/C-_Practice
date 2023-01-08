@@ -42,6 +42,7 @@ if(!movie || !sub){
             Movie* tempMovie = new Movie(movieId,numCount);
             Node<Movie>* tempNode = new Node<Movie>(tempMovie);
             movieList->insert(tempNode);
+            
         }
         sub>>begin2;
         while(sub.eof() == false){
@@ -49,6 +50,11 @@ if(!movie || !sub){
             Subscriber* tempSubs = new Subscriber(subscriberInfo);
             Node<Subscriber>* tempNode = new Node<Subscriber>(tempSubs);
             subsList->insert(tempNode);
+            char ch;
+            sub.get(ch);
+            if(ch == ' '){
+                sub>>begin2;
+            }
         }
         //cout<<subsList->getLength()<<" subscribers and "<<movieList->getLength()<<" movies have been loaded"<<endl;
         cout<<begin2<<" subscribers and "<<begin1<<" movies have been loaded"<<endl; 
